@@ -19,7 +19,9 @@ This sample consists of following projects.
 - Front end Angular single-page application
 - .NET core API-1
 - .NET core API-2
+
 (This sample is taken from the GitHub repo https://github.com/Azure-Samples/ms-identity-javascript-angular-tutorial/blob/main/7-AdvancedScenarios/1-call-api-obo/README.md and customized for current demostration)
+
 Front end Angular app  lets a user authenticate and obtain an access token to call an ASP.NET Core web API 1 and ASP.NET Core web API 2, protected by [Azure Active Directory (Azure AD)](https://azure.microsoft.com/services/active-directory/). These two web APIs then calls the [Microsoft Graph API](https://developer.microsoft.com/graph) using the [OAuth 2.0 on-behalf-of flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow). The web API's call to Microsoft Graph is made using the [Microsoft Graph SDK](https://docs.microsoft.com/graph/sdks/sdks-overview).Additionaly, Front end app has API permission to Azure batch service resource, API-1 has a API permission to Azure devops resource and API-2 has API permission to Azure Storage resource. The purpose of this repo is to demostrate the different consent behaviour with knownclient and preauthorizedclient attribute.If you are intrested to understand how code works or if you want explore how OBO flow work then please refer the sample https://github.com/Azure-Samples/ms-identity-javascript-angular-tutorial/blob/main/7-AdvancedScenarios/1-call-api-obo/README.md
 
 ## Scenario
@@ -35,12 +37,12 @@ Front end Angular app  lets a user authenticate and obtain an access token to ca
 
 | File/folder                         | Description                                                |
 |-------------------------------------|------------------------------------------------------------|
-| `SPA/src/app/auth-config.ts`        | Authentication parameters for SPA project reside here.     |
-| `SPA/src/app/app.module.ts`         | MSAL Angular is initialized here.                          |
-| `API/ProfileAPI-1/appsettings.json`   | Authentication parameters for API-1 project reside here.     |
-| `API/ProfileAPI-1/Startup.cs`         | Microsoft.Identity.Web is initialized here.                |
-| `API/ProfileAPI-2/appsettings.json`   | Authentication parameters for API-2 project reside here.     |
-| `API/ProfileAPI-2/Startup.cs`         | Microsoft.Identity.Web is initialized here.                |
+| `ProfileSPA/src/app/auth-config.ts`        | Authentication parameters for SPA project reside here.     |
+| `ProfileSPA/src/app/app.module.ts`         | MSAL Angular is initialized here.                          |
+| `ProfileAPI-1/ProfileAPI-1/appsettings.json`   | Authentication parameters for API-1 project reside here.     |
+| `ProfileAPI-1/ProfileAPI-1/Startup.cs`         | Microsoft.Identity.Web is initialized here.                |
+| `ProfileAPI-2/ProfileAPI-2/appsettings.json`   | Authentication parameters for API-2 project reside here.     |
+| `ProfileAPI-2/ProfileAPI-2/Startup.cs`         | Microsoft.Identity.Web is initialized here.                |
 
 
 ## Prerequisites
@@ -63,9 +65,9 @@ or download and extract the repository .zip file.
 ### Step 2. Install .NET Core API dependencies
 
 ```console
-    cd ProfileAPI-1
+    cd ProfileAPI-1/ProfileAPI-1
     dotnet restore
-    cd ProfileAPI-2
+    cd ProfileAPI-2/ProfileAPI-2
     dotnet restore
 ```
 
@@ -156,13 +158,13 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
-1. Open the `API\ProfileAPI-1\appsettings.json` file.
+1. Open the `ProfileAPI-1\ProfileAPI-1\appsettings.json` file.
 1. Find the key `Domain` and replace the existing value with your Azure AD tenant name.
 1. Find the key `ClientId` and replace the existing value with the application ID (clientId) of `ProfileAPI-1` app copied from the Azure portal.
 1. Find the key `ClientSecret` and replace the existing value with the key you saved during the creation of `ProfileAPI-1` copied from the Azure portal.
 1. Find the key `TenantId` and replace the existing value with your Azure AD tenant ID.
 
-1. Open the `API\Controllers\ProfileController.cs` file.
+1. Open the `Controllers\ProfileController.cs` file.
 1. Find the variable `scopeRequiredByApi` and replace its value with the name of the API scope that you have just exposed (by default `access_ProfileAPI_1`).
 
 ### Register the API 2 (ProfileAPI-2)
@@ -214,13 +216,13 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
-1. Open the `API\ProfileAPI-2\appsettings.json` file.
+1. Open the `ProfileAPI-2\ProfileAPI-2\appsettings.json` file.
 1. Find the key `Domain` and replace the existing value with your Azure AD tenant name.
 1. Find the key `ClientId` and replace the existing value with the application ID (clientId) of `ProfileAPI-2` app copied from the Azure portal.
 1. Find the key `ClientSecret` and replace the existing value with the key you saved during the creation of `ProfileAPI-2` copied from the Azure portal.
 1. Find the key `TenantId` and replace the existing value with your Azure AD tenant ID.
 
-1. Open the `API\Controllers\ProfileController.cs` file.
+1. Open the `Controllers\ProfileController.cs` file.
 1. Find the variable `scopeRequiredByApi` and replace its value with the name of the API scope that you have just exposed (by default `access_ProfileAPI_2`).
 
 ### Register the client app (ProfileSPA)
@@ -299,7 +301,7 @@ In a separate console window, execute the following commands:
 
 Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUOU5PNlM4MzRRV0lETkk2ODBPT0NBTEY5MCQlQCN0PWcu).
 
-##Consent behaviours
+## Consent Behaviour
 
 #### Configure Known Client Applications for service (ProfileAPI)
 
