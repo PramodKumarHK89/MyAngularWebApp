@@ -240,7 +240,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
    - Select the **Add a permission** button and then:
        - Ensure that the **Microsoft APIs** tab is selected.
        - In the *Commonly used Microsoft APIs* section, select **Microsoft Graph**
-       - In the **Delegated permissions** section, select the **User.Read** & **Directory.Read.All** in the list. Use the search box if necessary.
+       - In the **Delegated permissions** section, select the **User.Read** & **Device.Read** in the list. Use the search box if necessary.
        - Select the **Add permissions** button at the bottom.
     - Select the **Add a permission** button and then,
        - Ensure that the **Microsoft APIs** tab is selected.
@@ -268,7 +268,6 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Open the `ProfileSPA\src\app\auth-config.ts` file.
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of `ProfileSPA` app copied from the Azure portal.
 1. Find the key `Enter_the_Tenant_Info_Here` and replace the existing value with your Azure AD tenant ID.
-1. Find the key `Enter_the_Application_Id_of_Service_Here` and replace the existing value with the application ID (clientId) of `ProfileAPI` app copied from the Azure portal.
 
 ## Running the sample
 
@@ -302,6 +301,8 @@ In a separate console window, execute the following commands:
 Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUOU5PNlM4MzRRV0lETkk2ODBPT0NBTEY5MCQlQCN0PWcu).
 
 ## Consent Behaviour
+
+1. Find the key `Enter_the_Application_Id_of_Service_Here` and replace the existing value with the application ID (clientId) of `ProfileAPI` app copied from the Azure portal.
 
 #### Configure Known Client Applications for service (ProfileAPI)
 
