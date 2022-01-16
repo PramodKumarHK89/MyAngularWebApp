@@ -315,21 +315,25 @@ Consent behaviour depends on the scope that has been sent while making the call 
 
 ##### Consent prompt screenshot #####
 
+![Screenshot](./ConsentScreenshot/Scenario-1.1.jpg)
+
 ##### Explanation for the consents that are shown in the prompt #####
-- The permission `View your list of devices` is shown in the consent promt since ProfileSPA has  **Delegated API permissions** for **Device.Read** for **Graph** resource and scope parameter to authorize endpoint contains Device.read.
-- The permission `View your basic profile` & `Maintain access to data you have given it access to`) shown in the consent prompt since scope parameter to authorize endpoint has `openid` `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **offline.access** **profile** are configured automatically for the apps signing into the applications in Azure AD.
+- The permission `View your list of devices` is shown in the consent promt since ProfileSPA has  **Delegated API permissions** for **Device.Read** for **Graph** resource and scope parameter to authorize endpoint contains `Device.read`.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **profile** & **offline.access** scopes will be configured automatically for the apps signing into the applications in Azure AD as per the open id connect.
 
 ##### Scenario 2: Request the scope for Azure Batch resource #####
 
    1. Pass client id of `Azure Batch Service` with `user_impersonation` scope. 
      - Scope value in the code `scopes: ["https://batch.core.windows.net/user_impersonation"]`
-     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=https://batch.core.windows.net/user_impersonation openid profile` 
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=https://batch.core.windows.net/user_impersonation openid profile offline_access` 
      
 ##### Consent prompt screenshot #####
 
+![Screenshot](./ConsentScreenshot/Scenario-1.2.jpg)
+
 ##### Explanation for the consents that are shown in the prompt #####
 - The permission `Full access to Azure Batch Service API` is shown in the consent promt since ProfileSPA has  **Delegated API permissions** to **user_impersonation** scope for **AzureBatch service** and scope parameter to authorize endpoint contains `https://batch.core.windows.net/user_impersonation`.
-- The permission `View your basic profile` & `Maintain access to data you have given it access to`) shown in the consent prompt since scope parameter to authorize endpoint has `openid` `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **offline.access** **profile** are configured automatically for the apps signing into the applications in Azure AD.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **profile** & **offline.access** scopes will be configured automatically for the apps signing into the applications in Azure AD as per the open id connect.
 
 ##### Scenario 3: Request the scope for ProfileAPI-1 resource #####
 
@@ -339,9 +343,11 @@ Consent behaviour depends on the scope that has been sent while making the call 
      
 ##### Consent prompt screenshot #####
 
+![Screenshot](./ConsentScreenshot/Scenario-1.3.jpg)
+
 ##### Explanation for the consents that are shown in the prompt #####
-- The permission `Access for you to call access_ProfileAPI_1 permissions` is shown in the consent prompt since ProfileSPA has  **Delegated API permissions** to **access_ProfileAPI_1** scope for **ProfileAPI-1** and scope parameter to authorize endpoint contains `api://app_id_of_Profile_API_1/access_ProfileAPI_1`.
-- The permission `View your basic profile` & `Maintain access to data you have given it access to`) shown in the consent prompt since scope parameter to authorize endpoint has `openid` `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **offline.access** **profile** are configured automatically for the apps signing into the applications in Azure AD.
+- The permission `Access for you to call access_ProfileAPI_1 permissions (ProfileAPI-2)` is shown in the consent prompt since ProfileSPA has  **Delegated API permissions** to **access_ProfileAPI_1** scope for **ProfileAPI-1** and scope parameter to authorize endpoint contains `api://app_id_of_Profile_API_1/access_ProfileAPI_1`.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **profile** & **offline.access** scopes will be configured automatically for the apps signing into the applications in Azure AD as per the open id connect.
 
 ##### Scenario 4: Request the scope for ProfileAPI-2 resource #####
 
@@ -351,10 +357,12 @@ Consent behaviour depends on the scope that has been sent while making the call 
      
 ##### Consent prompt screenshot #####
 
+![Screenshot](./ConsentScreenshot/Scenario-1.4.jpg)
+
 ##### Explanation for the consents that are shown in the prompt #####
-- The permission `Access for you to call access_ProfileAPI_2 permissions` is shown in the consent prompt since ProfileSPA has  **Delegated API permissions** to **access_ProfileAPI_2** scope for **ProfileAPI-2** and scope parameter to authorize endpoint contains `api://app_id_of_Profile_API_2/access_ProfileAPI_2`.
-- The permission `View your basic profile` & `Maintain access to data you have given it access to`) shown in the consent prompt since scope parameter to authorize endpoint has `openid` `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **offline.access** **profile** are configured automatically for the apps signing into the applications in Azure AD.
-- 
+- The permission `Access for you to call access_ProfileAPI_2 permissions (ProfileAPI-2)` is shown in the consent prompt since ProfileSPA has  **Delegated API permissions** to **access_ProfileAPI_2** scope for **ProfileAPI-2** and scope parameter to authorize endpoint contains `api://app_id_of_Profile_API_2/access_ProfileAPI_2`.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **profile** & **offline.access** scopes will be configured automatically for the apps signing into the applications in Azure AD as per the open id connect.
+
 #### Scenario 5: .default scope ####
 
 ##### You will observe a same consent prompt, for the below scope values being passed. #####
@@ -380,9 +388,11 @@ Consent behaviour depends on the scope that has been sent while making the call 
 
 ##### Consent prompt screenshot #####
 
+![Screenshot](./ConsentScreenshot/Scenario-1.5.jpg)
+
 ##### Explanation for the consents that are shown in the prompt #####
 
- - The permissions in the black rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **User.Read** & **Device.Read** from GRAPH resource.  
+ - The permissions in the black rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **User.Read** & **Device.Read** from GRAPH resource. Please note that, **User.Read** scope combines the **profile** scope with it and hence you will not see a separte consent for `View your basic profile`
  - The permission in the red rectangle of the screenshot (`Access for you to call access_ProfileAPI_2 permissions (ProfileAPI-2)`) in the consent prompt, is shown since ProfileSPA has **Delegated API permissions** added to **access_ProfileAPI_2** for ProfileAPI-2 resource.  
  - The permission in the blue rectangle of the screenshot (`Full access to Azure Batch Service API`) in the consent prompt, is shown since ProfileSPA has **Delegated API permissions** added to **user_impersonation** for AzureBatch resource.
  - The permissions in the green rectangle of the screenshot (`Access for you to call access_ProfileAPI_1_withoutpreauthclient permissions (ProfileAPI-1)` & `Access for you to call access_ProfileAPI_1 permissions (ProfileAPI-1)`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** for ProfileAPI-1 resource.  
@@ -393,13 +403,81 @@ Consent behaviour depends on the scope that has been sent while making the call 
 
 Visit the app regsitration page of **ProfileAPI-1** and navigate to **Expose an API** blade. There is an option to add an **AuthorizedClient application**, please click on the `Add a client application` and then copy the client id of **ProfileSPA** and paste it in the cliend id textbox on the page. Be sure to select the API **access_ProfileAPI_1**.Authorizing a client application indicates that this API trusts the application and users should not be asked to consent when the client calls this API. This setting is specific to API rather than application. We have added authorixed client only to **access_ProfileAPI_1** and not to **access_ProfileAPI_1_withoutpreauthclient**. 
 
-#### Example 1: Specific scopes ####
+#### Specific scopes scenarios ####
 
-#####
+##### Scenario 1: Request the scope for GRAPH resource #####
 
-#### Example 2: .default scope ####
+   1. Pass client id of `Graph API` with `User.Read` scope. 
+      - Scope value in the code `scopes: ["https://graph.microsoft.com/user.Read"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=https://graph.microsoft.com/User.Read openid profile offline_access`
 
-##### Sceanrio 1: #####
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-2.1.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `Sign you in and read your profile` is shown in the consent promt since ProfileSPA has  **Delegated API permissions** for **User.Read** for **Graph** resource and scope parameter to authorize endpoint contains `User.read` & `profile`. Please note that, **User.Read** scope combines the **profile** scope along with it and hence you will not see a separte consent for `View your basic profile`
+- The permission `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **offline.access** & **profile** are configured automatically for the apps signing into the applications in Azure AD as per the open id standards.
+
+##### Scenario 2: Request the scope for Azure Batch resource #####
+
+   1. Pass client id of `Azure Batch Service` with `user_impersonation` scope. 
+     - Scope value in the code `scopes: ["https://batch.core.windows.net/user_impersonation"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=https://batch.core.windows.net/user_impersonation openid profile offline_access` 
+     
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-2.2.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `Full access to Azure Batch Service API` is shown in the consent promt since ProfileSPA has  **Delegated API permissions** to **user_impersonation** scope for **AzureBatch service** and scope parameter to authorize endpoint contains `https://batch.core.windows.net/user_impersonation`.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **profile** & **offline.access** scopes will be configured automatically for the apps signing into the applications in Azure AD as per the open id connect.
+
+##### Scenario 3: Request the scope for ProfileAPI-1 resource which is tagged against the preauthorizedclient attribute #####
+
+   1. Pass client id of `ProfileAPI-1` with `access_ProfileAPI_1` scope. 
+     - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/access_ProfileAPI_1"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/access_ProfileAPI_1 openid profile offline_access`
+
+##### Consent prompt screenshot #####
+
+No consent prompt !!!!
+
+##### Explanation for no consent prompt in this scenario #####
+
+Since we added a client id of ProfileSPA against the API **access_ProfileAPI_1**  in the ProfileAPI-1, there is no consent prompt shown. Additionaly, an accesstoken is granted with the scope `"scp": "access_ProfileAPI_1"` after the SPA hit the token endpoint without any user consent being shown.
+
+##### Scenario 4: Request the scope for ProfileAPI-1 resource  which is NOT tagged against the preauthorizedclient attribute  #####
+
+   1. Pass client id of `ProfileAPI-1` with `access_ProfileAPI_1_withoutpreauthclient` scope. 
+     - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/access_ProfileAPI_1_withoutpreauthclient"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/access_ProfileAPI_1_withoutpreauthclient openid profile offline_access`
+     
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-2.4.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `Access for you to call access_ProfileAPI_1_withoutpreauthclient permissions (ProfileAPI-1)` is shown in the consent prompt since ProfileSPA has  **Delegated API permissions** to **access_ProfileAPI_1_withoutpreauthclient** scope for **ProfileAPI-1** and scope parameter to authorize endpoint contains `api://app_id_of_Profile_API_1/access_ProfileAPI_1_withoutpreauthclient`.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **profile** & **offline.access** scopes will be configured automatically for the apps signing into the applications in Azure AD as per the open id connect.
+- 
+##### Scenario 5: Request the scope for ProfileAPI-2 resource #####
+
+   1. Pass client id of `ProfileAPI-2` with `access_ProfileAPI_2` scope. 
+     - Scope value in the code `scopes: ["api://app_id_of_Profile_API_2/access_ProfileAPI_2"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_2/access_ProfileAPI_2 openid profile offline_access`
+     
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-2.5.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `Access for you to call access_ProfileAPI_2 permissions (ProfileAPI-2)` is shown in the consent prompt since ProfileSPA has  **Delegated API permissions** to **access_ProfileAPI_2** scope for **ProfileAPI-2** and scope parameter to authorize endpoint contains `api://app_id_of_Profile_API_2/access_ProfileAPI_2`.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to`) shown in the consent prompt since scope parameter to authorize endpoint has `openid` `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope(To which scope is not sent in the request), **offline.access** **profile** are configured automatically for the apps signing into the applications in Azure AD.
+
+#### .default scope scenarios ####
+
+##### Sceanrio 6: #####
  
  You will observe a same consent prompt, for the below scope values being passed.
  
@@ -419,30 +497,38 @@ Visit the app regsitration page of **ProfileAPI-1** and navigate to **Expose an 
       - Scope value in the code `scopes: [".default"]`
       - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=.default openid profile offline_access`
 
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-2.6.jpg)
+
 ##### Explanation for the consents that are shown in the prompt #####
 
- - The permissions in the black rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **User.Read** & **Device.Read** from GRAPH resource.  
- - The permission in the red rectangle of the screenshot (`Read user calendars + Graph_Offlineaccess + Access Azure Storage (ProfileAPI-2)`) in the consent prompt, is shown since ProfileSPA has **Delegated API permissions** added to **access_ProfileAPI_2** from ProfileAPI-2 resource.  
+ - The permissions in the black rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **User.Read** & **Device.Read** from GRAPH resource.Please note that, **User.Read** scope combines the **profile** scope with it and hence you will not see a separte consent for `View your basic profile`
+ - The permission in the red rectangle of the screenshot (`Access for you to call access_ProfileAPI_2 permissions (ProfileAPI-2)`) in the consent prompt, is shown since ProfileSPA has **Delegated API permissions** added to **access_ProfileAPI_2** from ProfileAPI-2 resource.  
  - The permission in the blue rectangle of the screenshot (`Full access to Azure Batch Service API`) in the consent prompt, is shown since ProfileSPA has **Delegated API permissions** added to **user_impersonation** from AzureBatch resource.
- - The permissions in the green rectangle of the screenshot (`Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs. (ProfileAPI-1)` & `Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs. (ProfileAPI-1)`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** from ProfileAPI-1 resource.  
+ - The permissions in the green rectangle of the screenshot (`Access for you to call access_ProfileAPI_1_withoutpreauthclient permissions (ProfileAPI-1)` & `Access for you to call access_ProfileAPI_1 permissions (ProfileAPI-1)`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** from ProfileAPI-1 resource.  
 
-##### Scenario 2:  #####
+##### Scenario 7: With appending .default scope to the app id of the API in which preauthorizedclient attribute is configured  #####
 
 1. Pass client id of `Profile API 1` with default scope. 
       - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/.default"]`
       - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/.default openid profile offline_access`
 
+##### Consent prompt screenshot #####
+
+No consent prompt !!!
+
 ##### Explanation for no consent prompt #####
 
-Since we added a client id of ProfileSPA against the API **access_ProfileAPI_1**  in the ProfileAPI-1, there is no consent prompt shown. Additionaly, an accesstoken is granted with the scope `"scp": "access_ProfileAPI_1"` without any user consent.
+We added a client id of ProfileSPA against the API **access_ProfileAPI_1**  in the ProfileAPI-1. While evaluating the .default for the ProfileAPI-1, AzureAd took consideration of the scope **access_ProfileAPI_1** against which preauthorizedclient attribute is added and hence there is no consent prompt shown. Additionaly, an accesstoken is granted with the scope `"scp": "access_ProfileAPI_1"` without user having to consent it.
 
-##### Learning from the above test is that, if there is preauthorizedclient attribute added in the API for the client app and then .default scope is passed appending with the app id of the API, then consent prompt is not shown. Be aware that, this behaviour may lead to confusion as issued access token may not have scopes for the resource requested for(.default is not honoured). For example scope for `access_ProfileAPI_1_withoutpreauthclient` is missing. ##### 
+##### Learning from the above test is that, if there is preauthorizedclient attribute added in the API for the client app and then if .default scope is passed appending with the app id of the API, then consent prompt is not shown. Be aware that, this behaviour may lead to confusion as issued access token may not have scopes for the resource requested for(.default is not honoured). For example scope for `access_ProfileAPI_1_withoutpreauthclient` is missing in the accesstoken. ##### 
 
 ### 3. With knownClientApplications attribute ###
 
 #### Configure Known Client Applicationn for service (ProfileAPI-2)
 
-For a middle-tier web API (`ProfileAPI-1` & `ProfileAPI-2`) to be able to call a downstream web API, the middle-tier app needs to be granted the required permissions as well. However, since the middle-tier cannot interact with the signed-in user, it needs to be explicitly bound to the client app in its **Azure AD** registration. This binding merges the permissions required by both the client and the middle tier Web Api and presents it to the end user in a single consent dialog. The user then consent to this combined set of permissions.
+In all the above scenarios, none of the scopes that are added in the API didn't come in the picture. For a middle-tier web API (`ProfileAPI-1` & `ProfileAPI-2`) to be able to call a downstream web API, the middle-tier app needs to be granted the required permissions as well. However, since the middle-tier cannot interact with the signed-in user, it needs to be explicitly bound to the client app in its **Azure AD** registration. This binding merges the permissions required by both the client and the middle tier Web Api and presents it to the end user in a single consent dialog. The user then consent to this combined set of permissions.
 
 To achieve this, you need to add the **Application Id** of the client app, in the Manifest of the web API in the `knownClientApplications` property. Here's how:
 
@@ -463,13 +549,81 @@ The middle-tier application adds the client to the `knownClientApplications` lis
 
 > :information_source: **KnownClientApplications** is an attribute in **application manifest**. It is used for bundling consent if you have a solution that contains two (or more) parts: a client app and a custom web API. If you enter the `appID` (clientID) of the client app into this array, the user will have to consent only once to the client app. Azure AD will know that consenting to the client means implicitly consenting to the web API. It will automatically provision service principals for both the client and web API at the same time. Both the client and the web API app must be registered in the same tenant.
 
-#### Example 1: Specific scopes ####
+#### Specific scopes sceanrios ####
 
-#####
+##### Scenario 1: Request the scope for GRAPH resource #####
 
-#### Example 2: .default scope ####
+   1. Pass client id of `Graph API` with `User.Read` scope. 
+      - Scope value in the code `scopes: ["https://graph.microsoft.com/user.Read"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=https://graph.microsoft.com/User.Read openid profile offline_access`
 
-##### Scenario 1: #####
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-3.1.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `Sign you in and read your profile` is shown in the consent promt since ProfileSPA has  **Delegated API permissions** for **User.Read** for **Graph** resource and scope parameter to authorize endpoint contains `User.read` & `profile`. Please note that, **User.Read** scope combines the **profile** scope along with it and hence you will not see a separte consent for `View your basic profile`
+- The permission `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **offline.access** & **profile** are configured automatically for the apps signing into the applications in Azure AD as per the open id standards.
+
+##### Scenario 2: Request the scope for Azure Batch resource #####
+
+   1. Pass client id of `Azure Batch Service` with `user_impersonation` scope. 
+     - Scope value in the code `scopes: ["https://batch.core.windows.net/user_impersonation"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=https://batch.core.windows.net/user_impersonation openid profile offline_access` 
+     
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-3.2.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `Full access to Azure Batch Service API` is shown in the consent promt since ProfileSPA has  **Delegated API permissions** to **user_impersonation** scope for **AzureBatch service** and scope parameter to authorize endpoint contains `https://batch.core.windows.net/user_impersonation`.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **profile** & **offline.access** scopes will be configured automatically for the apps signing into the applications in Azure AD as per the open id connect.
+
+##### Scenario 3: Request the scope for ProfileAPI-1 resource which is tagged against the preauthorizedclient attribute #####
+
+   1. Pass client id of `ProfileAPI-1` with `access_ProfileAPI_1` scope. 
+     - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/access_ProfileAPI_1"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/access_ProfileAPI_1 openid profile offline_access`
+
+##### Consent prompt screenshot #####
+
+No consent prompt !!!!
+
+##### Explanation for no consent prompt in this scenario #####
+
+Since we added a client id of ProfileSPA against the API **access_ProfileAPI_1**  in the ProfileAPI-1, there is no consent prompt shown. Additionaly, an accesstoken is granted with the scope `"scp": "access_ProfileAPI_1"` after the SPA hit the token endpoint without any user consent being shown.
+
+##### Scenario 4: Request the scope for ProfileAPI-1 resource  which is NOT tagged against the preauthorizedclient attribute  #####
+
+   1. Pass client id of `ProfileAPI-1` with `access_ProfileAPI_1_withoutpreauthclient` scope. 
+     - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/access_ProfileAPI_1_withoutpreauthclient"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/access_ProfileAPI_1_withoutpreauthclient openid profile offline_access`
+     
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-3.4.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `Access for you to call access_ProfileAPI_1_withoutpreauthclient permissions (ProfileAPI-1)` is shown in the consent prompt since ProfileSPA has  **Delegated API permissions** to **access_ProfileAPI_1_withoutpreauthclient** scope for **ProfileAPI-1** and scope parameter to authorize endpoint contains `api://app_id_of_Profile_API_1/access_ProfileAPI_1_withoutpreauthclient`.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **profile** & **offline.access** scopes will be configured automatically for the apps signing into the applications in Azure AD as per the open id connect.
+- 
+##### Scenario 5: Request the scope for ProfileAPI-2 resource #####
+
+   1. Pass client id of `ProfileAPI-2` with `access_ProfileAPI_2` scope. 
+     - Scope value in the code `scopes: ["api://app_id_of_Profile_API_2/access_ProfileAPI_2"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_2/access_ProfileAPI_2 openid profile offline_access`
+     
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-3.5.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `Access for you to call access_ProfileAPI_2 permissions (ProfileAPI-2)` is shown in the consent prompt since ProfileSPA has  **Delegated API permissions** to **access_ProfileAPI_2** scope for **ProfileAPI-2** and scope parameter to authorize endpoint contains `api://app_id_of_Profile_API_2/access_ProfileAPI_2`. 
+- The permission `View your basic profile` & `Maintain access to data you have given it access to`) shown in the consent prompt since scope parameter to authorize endpoint has `openid` `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope(To which scope is not sent in the request), **offline.access** **profile** are configured automatically for the apps signing into the applications in Azure AD.
+
+#### .default scope scenarios ####
+
+##### Scenario 6: #####
  
  You will observe a same consent prompt, for the below scope values being passed.
  
@@ -492,23 +646,27 @@ The middle-tier application adds the client to the `knownClientApplications` lis
 ##### Explanation for the consents that are shown in the prompt #####
 
  - The permissions in the black rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **User.Read** & **Device.Read** from GRAPH resource.  Plus, permission(`Full access to Azure Batch Service API`) is shown since, it also has **Delegated API permissions** added to **user_impersonation** from AzureBatch resource.
-  - The permissions in the red rectangle of the screenshot (`Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs. (ProfileAPI-1)` & `Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs. (ProfileAPI-1)`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** from ProfileAPI-1 resource.  
+  - The permissions in the red rectangle of the screenshot (`Access for you to call access_ProfileAPI_1_withoutpreauthclient permissions (ProfileAPI-1)` & `Access for you to call access_ProfileAPI_1 permissions (ProfileAPI-1)`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** from ProfileAPI-1 resource.  
  - The permission in the blue rectangle of the screenshot (`Access Azure Storage As the Signed-in User`, `Maintain access to data you have given it access to` & `
 Read your calendars`) in the consent prompt, is shown since ProfileAPI-2 has **Delegated API permissions** added to **Calendars.Read** & **offline_access** for GRAPH resource and **user_impersonation** scope for Azure storage resource. Please note that, ProfileSPA had an API permission **access_ProfileAPI_2** added for the resource ProfileAPI-2 and also, client id of the ProfileSPA is updated in the KnownclientApplications attribute of the ProfileAPI-2 manifest. As a result of which, consent agregated and combined the permissions which are added in the ProfileAPI-2. 
 
-##### Scenario 2:  #####
+##### Scenario 7:  With appending .default scope to the app id of the API in which preauthorizedclient attribute is configured #####
 
 1. Pass client id of `Profile API 1` with default scope. 
       - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/.default"]`
       - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/.default openid profile offline_access`
 
+##### Consent prompt screenshot #####
+
+No consent prompt !!!
+
 ##### Explanation for no consent prompt #####
 
-Since we added client id of ProfileSPA in the preauthorizedclient attribute against **access_ProfileAPI_1** scope of ProfileAPI-1, there is no consent prompt shown. Additionaly, an accesstoken is granted with the scope `"scp": "access_ProfileAPI_1"` without any user consent. Refer previous example under preauthorizedclient for more details.
+We added a client id of ProfileSPA against the API **access_ProfileAPI_1**  in the ProfileAPI-1. While evaluating the .default for the ProfileAPI-1, AzureAd took consideration of the scope **access_ProfileAPI_1** against which preauthorizedclient attribute is added and hence there is no consent prompt shown. Additionaly, an accesstoken is granted with the scope `"scp": "access_ProfileAPI_1"` without user having to consent it.
 
-##### Learning from the above test is that, if there is a knownclientapplication attribute added in the API for the client app, then it aggregates scope present in API.
+##### Learning from the above scenarios is that, if there is a knownclientapplication attribute added in the API for the client app, then it aggregates scope present in the API.Additionaly, knownclientapplicatin attribute works only with .default scope. ####
 
-### 4. With knownClientApplications & with preAuthorizedApplications combined
+### 4. With knownClientApplications & with preAuthorizedApplications combined ###
 
 In the previous sceanrios, we have already configured preAuthorizedApplications for the `ProfileAPI-1`. Now let us add client id of the ProfileSPA in the knownClientApplications attribute manifest of `ProfileAPI-1` to test combined behaviour of knownClientApplications & preAuthorizedApplications. We have already configured the knownclientapplivation attribute for the ProfileAPI-2, so let us now do it for the ProfileAPI-1.
 
@@ -525,13 +683,82 @@ For instance:
 
 1. **Save** the changes to the manifest.
 
-#### Example 1: Specific scopes ####
+#### Specific scopes sceanrios ####
 
-#####
 
-#### Example 2: .default scope ####
+##### Scenario 1: Request the scope for GRAPH resource #####
 
-##### Scenario 1: #####
+   1. Pass client id of `Graph API` with `Device.Read` scope. 
+      - Scope value in the code `scopes: ["https://graph.microsoft.com/Device.Read"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=https://graph.microsoft.com/Device.Read openid profile offline_access`
+
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-4.1.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `View your list of devices` is shown in the consent promt since ProfileSPA has  **Delegated API permissions** for **Device.Read** for **Graph** resource and scope parameter to authorize endpoint contains `Device.read`.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **profile** & **offline.access** scopes will be configured automatically for the apps signing into the applications in Azure AD as per the open id connect.
+
+##### Scenario 2: Request the scope for Azure Batch resource #####
+
+   1. Pass client id of `Azure Batch Service` with `user_impersonation` scope. 
+     - Scope value in the code `scopes: ["https://batch.core.windows.net/user_impersonation"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=https://batch.core.windows.net/user_impersonation openid profile offline_access` 
+     
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-4.2.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `Full access to Azure Batch Service API` is shown in the consent promt since ProfileSPA has  **Delegated API permissions** to **user_impersonation** scope for **AzureBatch service** and scope parameter to authorize endpoint contains `https://batch.core.windows.net/user_impersonation`.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **profile** & **offline.access** scopes will be configured automatically for the apps signing into the applications in Azure AD as per the open id connect.
+
+##### Scenario 3: Request the scope for ProfileAPI-1 resource which is tagged against the preauthorizedclient attribute #####
+
+   1. Pass client id of `ProfileAPI-1` with `access_ProfileAPI_1` scope. 
+     - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/access_ProfileAPI_1"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/access_ProfileAPI_1 openid profile offline_access`
+
+##### Consent prompt screenshot #####
+
+No consent prompt !!!!
+
+##### Explanation for no consent prompt in this scenario #####
+
+Since we added a client id of ProfileSPA against the API **access_ProfileAPI_1**  in the ProfileAPI-1, there is no consent prompt shown. Additionaly, an accesstoken is granted with the scope `"scp": "access_ProfileAPI_1"` after the SPA hit the token endpoint without any user consent being shown.
+
+##### Scenario 4: Request the scope for ProfileAPI-1 resource  which is NOT tagged against the preauthorizedclient attribute  #####
+
+   1. Pass client id of `ProfileAPI-1` with `access_ProfileAPI_1_withoutpreauthclient` scope. 
+     - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/access_ProfileAPI_1_withoutpreauthclient"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/access_ProfileAPI_1_withoutpreauthclient openid profile offline_access`
+     
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-4.4.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `Access for you to call access_ProfileAPI_1_withoutpreauthclient permissions (ProfileAPI-1)` is shown in the consent prompt since ProfileSPA has  **Delegated API permissions** to **access_ProfileAPI_1_withoutpreauthclient** scope for **ProfileAPI-1** and scope parameter to authorize endpoint contains `api://app_id_of_Profile_API_1/access_ProfileAPI_1_withoutpreauthclient`.
+- The permission `View your basic profile` & `Maintain access to data you have given it access to` shown in the consent prompt since scope parameter to authorize endpoint has `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope, **profile** & **offline.access** scopes will be configured automatically for the apps signing into the applications in Azure AD as per the open id connect.
+- 
+##### Scenario 5: Request the scope for ProfileAPI-2 resource #####
+
+   1. Pass client id of `ProfileAPI-2` with `access_ProfileAPI_2` scope. 
+     - Scope value in the code `scopes: ["api://app_id_of_Profile_API_2/access_ProfileAPI_2"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_2/access_ProfileAPI_2 openid profile offline_access`
+     
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-4.5.jpg)
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permission `Access for you to call access_ProfileAPI_2 permissions (ProfileAPI-2)` is shown in the consent prompt since ProfileSPA has  **Delegated API permissions** to **access_ProfileAPI_2** scope for **ProfileAPI-2** and scope parameter to authorize endpoint contains `api://app_id_of_Profile_API_2/access_ProfileAPI_2`. 
+- The permission `View your basic profile` & `Maintain access to data you have given it access to`) shown in the consent prompt since scope parameter to authorize endpoint has `openid` `profile` & `offline_access`. Though you may only see ProfileSPA having **Delegated API permissions** for **User.Read** scope(To which scope is not sent in the request), **offline.access** **profile** are configured automatically for the apps signing into the applications in Azure AD.
+
+#### .default scope scenarios ####
+
+##### Scenario 6: #####
  
  You will observe a same consent prompt, for the below scope values being passed.
  
@@ -551,22 +778,31 @@ For instance:
       - Scope value in the code `scopes: [".default"]`
       - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=.default openid profile offline_access`
 
+##### Consent prompt screenshot #####
+
+![Screenshot](./ConsentScreenshot/Scenario-4.6.jpg)
+
 ##### Explanation for the consents that are shown in the prompt #####
 
  - The permissions in the black rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **User.Read** & **Device.Read** from GRAPH resource.  Plus, permission(`Full access to Azure Batch Service API`) is shown since, it also has **Delegated API permissions** added to **user_impersonation** from AzureBatch resource.
   - The permissions in the red rectangle of the screenshot (`Access Azure Storage As the Signed-in User`, `Maintain access to data you have given it access to` & `Read your calendars`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_2** for ProfileAPI-1 resource. Then, ProfileAPI-2 ressource and then ProfileAPI-2 inturn has **Delegated API permissions** to **Calendars.Read** & **offline_access** for GRAPH resource and **user_impersonation** scope for Azure storage resource. As a result of a knownclientapplication attribute, instead of showing a consent to `access_ProfileAPI_2`, it combined the API permissions for ProfileAPI-2 and aggregated to 3 permissions in the consent.
  - The permission in the blue rectangle of the screenshot (`Have full access to Visual Studio Team Services REST APIs` & `Read all files that you have access to`) in the consent prompt, is shown since ProfileAPI-1 has **Delegated API permissions** added to **Calendars.Read** for GRAPH resource and **user_impersonation** scope for Azure devops resource. Please note that, ProfileSPA had an API permission **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** added for the resource ProfileAPI-1 and also, client id of the ProfileSPA is updated in the KnownclientApplications attribute of the ProfileAPI-1 manifest. As a result of which, consent agregated and combined the permissions which are present in the ProfileAPI-1. 
 
-##### Scenario 2:  #####
+##### Scenario 7:  With appending .default scope to the app id of the API in which preauthorizedclient attribute is configure #####
 
 1. Pass client id of `Profile API 1` with default scope. 
       - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/.default"]`
       - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/.default openid profile offline_access`
 
+##### Consent prompt screenshot #####
+
+No consent prompt !!!!
+
 ##### Explanation for no consent prompt #####
 
 Since we added client id of ProfileSPA in the preauthorizedclient attribute against **access_ProfileAPI_1** scope of ProfileAPI-1, there is no consent prompt shown. Additionaly, an accesstoken is granted with the scope `"scp": "access_ProfileAPI_1"` without any user consent. Refer previous example under preauthorizedclient for more details.
 
+##### Learning from the above scenarios is that, if there is a knownclientapplication attribute added in the API for the client app + plus preauthorizedclient attribuet configured to one of the scopes in the same API, then knownclientapplication attribute will not get into effect as preauthorizedclient behaviour overrides it. #####
 
 ## We'd love your feedback!
 
