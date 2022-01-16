@@ -311,6 +311,17 @@ Consent behaviour depends on the scope that has been sent while making the call 
 
 #### Example 1: Specific scope ####
 
+##### Scenario 1: Request the scope for GRAPH resource #####
+
+   1. Pass client id of `Graph API` with `Device.Read` scope. 
+      - Scope value in the code `scopes: ["https://graph.microsoft.com/Device.Read"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=https://graph.microsoft.com/Device.Read openid profile offline_access`
+
+##### Consent prompt screenshot #####
+
+##### Explanation for the consents that are shown in the prompt #####
+- The permissions (`View your list of devices`, `View your basic profile` & `Maintain access to data you have given it access to`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **User.Read** & **Device.Read** from GRAPH resource.   
+-    
 #### Example 2: .default scope ####
 
 ##### You will observe a same consent prompt, for the below scope values being passed. #####
@@ -324,13 +335,13 @@ Consent behaviour depends on the scope that has been sent while making the call 
   1. Pass client id of `Profile SPA` with default scope. 
       - Scope value in the code `scopes: ["app_id_of_Profile_SPA/.default"]`
       - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=app_id_of_Profile_SPA/.default openid profile offline_access`
-   1. Pass client id of `Graph API` with default scope. 
+  1. Pass client id of `Graph API` with default scope. 
      - Scope value in the code `scopes: ["https://graph.microsoft.com/.default"]`
      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `https://graph.microsoft.com/.default openid profile offline_access`
-   1. Pass client id of `Azure Batch Service` with default scope. 
+  1. Pass client id of `Azure Batch Service` with default scope. 
       - Scope value in the code `scopes: ["https://batch.core.windows.net/.default"]`
       - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=.default openid profile offline_access`
-   1. Just pass `.default` with default scope. 
+  1. Just pass `.default` with default scope. 
       - Scope value in the code `scopes: [".default"]`
       - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=.default openid profile offline_access`
 
