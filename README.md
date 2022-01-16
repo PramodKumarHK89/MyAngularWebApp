@@ -307,7 +307,7 @@ Consent behaviour depends on the scope that has been sent while making the call 
 - Open the `ProfileSPA\src\app\auth-config.ts` file.
 - Find the key `Enter_the_Application_Id_of_Service_Here` in the and replace the existing value with the application ID (clientId). This will be passed as scope parameter during the login flow. 
 
-### 1. Without preAuthorizedApplications & knownClientApplications attributes ###
+### 1. Without preAuthorizedApplications & without knownClientApplications attributes ###
 
 #### Example 1: Specific scope ####
 
@@ -339,11 +339,11 @@ Consent behaviour depends on the scope that has been sent while making the call 
  - The permissions in the black rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **User.Read** & **Device.Read** from GRAPH resource.  
  - The permission in the red rectangle of the screenshot (`Read user calendars + Graph_Offlineaccess + Access Azure Storage (ProfileAPI-2)`) in the consent prompt, is shown since ProfileSPA has **Delegated API permissions** added to **access_ProfileAPI_2** from ProfileAPI-2 resource.  
  - The permission in the blue rectangle of the screenshot (`Full access to Azure Batch Service API`) in the consent prompt, is shown since ProfileSPA has **Delegated API permissions** added to **user_impersonation** from AzureBatch resource.
- - The permissions in the green rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** from ProfileAPI-1 resource.  
+ - The permissions in the green rectangle of the screenshot (`Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs. (ProfileAPI-1)` & `Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs. (ProfileAPI-1)`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** from ProfileAPI-1 resource.  
  
-##### Conclusion: If scope parameter containes `.default` in it, then Azure AD prompts the consent for all the API permissions that are added in the app registration of the requester(In this case, fron end SPA UI). ##### 
+##### Conclusion: If scope parameter containes `.default` in it, then Azure AD prompts the consent for all the API permissions that are added in the app registration of the requester(In this case, front end SPA UI).The use of “.default” (e.g. “https://graph.microsoft.com/.default”, “https://middle-tier.example.com/.default”, or even just “.default”) instead of a specific delegated permission will trigger the combined consent prompt. ##### 
 
-### 1. With preAuthorizedApplications & without knownClientApplications attributes ###
+### 2. With preAuthorizedApplications & without knownClientApplications attributes ###
 
 Visit the app regsitration page of **ProfileAPI-1** and navigate to **Expose an API** blade. There is an option to add an **AuthorizedClient application**, please click on the `Add a client application` and then copy the client id of **ProfileSPA** and paste it in the cliend id textbox on the page. Be sure to select the API **access_ProfileAPI_1**.Authorizing a client application indicates that this API trusts the application and users should not be asked to consent when the client calls this API. This setting is specific to API rather than application. We have added authorixed client only to **access_ProfileAPI_1** and not to **access_ProfileAPI_1_withoutpreauthclient**. 
 
@@ -353,11 +353,10 @@ Visit the app regsitration page of **ProfileAPI-1** and navigate to **Expose an 
 
 #### Example 2: .default scope ####
 
-##### You will observe a same consent prompt, for the below scope values being passed. #####
-
-  1. Pass client id of `Profile API 1` with default scope. 
-      - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/.default"]`
-      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/.default openid profile offline_access`
+##### Sceanrio 1: #####
+ 
+ You will observe a same consent prompt, for the below scope values being passed.
+ 
   1. Pass client id of `Profile API 2` with default scope. 
       - Scope value in the code `scopes: ["api://app_id_of_Profile_API_2/.default"]`
       - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_2/.default openid profile offline_access` 
@@ -379,17 +378,29 @@ Visit the app regsitration page of **ProfileAPI-1** and navigate to **Expose an 
  - The permissions in the black rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **User.Read** & **Device.Read** from GRAPH resource.  
  - The permission in the red rectangle of the screenshot (`Read user calendars + Graph_Offlineaccess + Access Azure Storage (ProfileAPI-2)`) in the consent prompt, is shown since ProfileSPA has **Delegated API permissions** added to **access_ProfileAPI_2** from ProfileAPI-2 resource.  
  - The permission in the blue rectangle of the screenshot (`Full access to Azure Batch Service API`) in the consent prompt, is shown since ProfileSPA has **Delegated API permissions** added to **user_impersonation** from AzureBatch resource.
- - The permissions in the green rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** from ProfileAPI-1 resource.  
- 
-##### Learning from the above test is that, if scope parameter containes `.default` in it, then Azure AD prompts the consent for all the API permissions that are added in the app registration of the requester(In this case, fron end SPA UI). ##### 
+ - The permissions in the green rectangle of the screenshot (`Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs. (ProfileAPI-1)` & `Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs. (ProfileAPI-1)`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** from ProfileAPI-1 resource.  
 
-#### Configure Known Client Applications for service (ProfileAPI)
+##### Scenario 2:  #####
 
-For a middle-tier web API (`ProfileAPI`) to be able to call a downstream web API, the middle-tier app needs to be granted the required permissions as well. However, since the middle-tier cannot interact with the signed-in user, it needs to be explicitly bound to the client app in its **Azure AD** registration. This binding merges the permissions required by both the client and the middle tier Web Api and presents it to the end user in a single consent dialog. The user then consent to this combined set of permissions.
+1. Pass client id of `Profile API 1` with default scope. 
+      - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/.default"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/.default openid profile offline_access`
+
+##### Explanation for no consent prompt #####
+
+Since we added a client id of ProfileSPA against the API **access_ProfileAPI_1**  in the ProfileAPI-1, there is no consent prompt shown. Additionaly, an accesstoken is granted with the scope `"scp": "access_ProfileAPI_1"` without any user consent.
+
+##### Learning from the above test is that, if there is preauthorizedclient attribute added in the API for the client app and then .default scope is passed appending with the app id of the API, then consent prompt is not shown. Be aware that, this behaviour may lead to confusion as issued access token may not have scopes for the resource requested for(.default is not honoured). For example scope for `access_ProfileAPI_1_withoutpreauthclient` is missing. ##### 
+
+### 3. With knownClientApplications attribute ###
+
+#### Configure Known Client Applicationn for service (ProfileAPI-2)
+
+For a middle-tier web API (`ProfileAPI-1` & `ProfileAPI-2`) to be able to call a downstream web API, the middle-tier app needs to be granted the required permissions as well. However, since the middle-tier cannot interact with the signed-in user, it needs to be explicitly bound to the client app in its **Azure AD** registration. This binding merges the permissions required by both the client and the middle tier Web Api and presents it to the end user in a single consent dialog. The user then consent to this combined set of permissions.
 
 To achieve this, you need to add the **Application Id** of the client app, in the Manifest of the web API in the `knownClientApplications` property. Here's how:
 
-1. In the [Azure portal](https://portal.azure.com), navigate to your `ProfileAPI` app registration, and select **Manifest** section.
+1. In the [Azure portal](https://portal.azure.com), navigate to your `ProfileAPI-2` app registration, and select **Manifest** section.
 1. In the manifest editor, change the `"knownClientApplications": []` line so that the array contains the Client ID of the client application (`ProfileSPA`) as an element of the array.
 
 For instance:
@@ -406,6 +417,109 @@ The middle-tier application adds the client to the `knownClientApplications` lis
 
 > :information_source: **KnownClientApplications** is an attribute in **application manifest**. It is used for bundling consent if you have a solution that contains two (or more) parts: a client app and a custom web API. If you enter the `appID` (clientID) of the client app into this array, the user will have to consent only once to the client app. Azure AD will know that consenting to the client means implicitly consenting to the web API. It will automatically provision service principals for both the client and web API at the same time. Both the client and the web API app must be registered in the same tenant.
 
+#### Example 1: Specific scopes ####
+
+#####
+
+#### Example 2: .default scope ####
+
+##### Scenario 1: #####
+ 
+ You will observe a same consent prompt, for the below scope values being passed.
+ 
+  1. Pass client id of `Profile API 2` with default scope. 
+      - Scope value in the code `scopes: ["api://app_id_of_Profile_API_2/.default"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_2/.default openid profile offline_access` 
+  1. Pass client id of `Profile SPA` with default scope. 
+      - Scope value in the code `scopes: ["app_id_of_Profile_SPA/.default"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=app_id_of_Profile_SPA/.default openid profile offline_access`
+   1. Pass client id of `Graph API` with default scope. 
+     - Scope value in the code `scopes: ["https://graph.microsoft.com/.default"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `https://graph.microsoft.com/.default openid profile offline_access`
+   1. Pass client id of `Azure Batch Service` with default scope. 
+      - Scope value in the code `scopes: ["https://batch.core.windows.net/.default"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=.default openid profile offline_access`
+   1. Just pass `.default` with default scope. 
+      - Scope value in the code `scopes: [".default"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=.default openid profile offline_access`
+
+##### Explanation for the consents that are shown in the prompt #####
+
+ - The permissions in the black rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **User.Read** & **Device.Read** from GRAPH resource.  Plus, permission(`Full access to Azure Batch Service API`) is shown since, it also has **Delegated API permissions** added to **user_impersonation** from AzureBatch resource.
+  - The permissions in the red rectangle of the screenshot (`Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs. (ProfileAPI-1)` & `Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs. (ProfileAPI-1)`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** from ProfileAPI-1 resource.  
+ - The permission in the blue rectangle of the screenshot (`Access Azure Storage As the Signed-in User`, `Maintain access to data you have given it access to` & `
+Read your calendars`) in the consent prompt, is shown since ProfileAPI-2 has **Delegated API permissions** added to **Calendars.Read** & **offline_access** for GRAPH resource and **user_impersonation** scope for Azure storage resource. Please note that, ProfileSPA had an API permission **access_ProfileAPI_2** added for the resource ProfileAPI-2 and also, client id of the ProfileSPA is updated in the KnownclientApplications attribute of the ProfileAPI-2 manifest. As a result of which, consent agregated and combined the permissions which are added in the ProfileAPI-2. 
+
+##### Scenario 2:  #####
+
+1. Pass client id of `Profile API 1` with default scope. 
+      - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/.default"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/.default openid profile offline_access`
+
+##### Explanation for no consent prompt #####
+
+Since we added client id of ProfileSPA in the preauthorizedclient attribute against **access_ProfileAPI_1** scope of ProfileAPI-1, there is no consent prompt shown. Additionaly, an accesstoken is granted with the scope `"scp": "access_ProfileAPI_1"` without any user consent. Refer previous example under preauthorizedclient for more details.
+
+##### Learning from the above test is that, if there is a knownclientapplication attribute added in the API for the client app, then it aggregates scope present in API.
+
+### 4. With knownClientApplications & with preAuthorizedApplications combined
+
+In the previous sceanrios, we have already configured preAuthorizedApplications for the `ProfileAPI-1`. Now let us add client id of the ProfileSPA in the knownClientApplications attribute manifest of `ProfileAPI-1` to test combined behaviour of knownClientApplications & preAuthorizedApplications. We have already configured the knownclientapplivation attribute for the ProfileAPI-2, so let us now do it for the ProfileAPI-1.
+
+To achieve this, you need to add the **Application Id** of the client app, in the Manifest of the web API in the `knownClientApplications` property. Here's how:
+
+1. In the [Azure portal](https://portal.azure.com), navigate to your `ProfileAPI-1` app registration, and select **Manifest** section.
+1. In the manifest editor, change the `"knownClientApplications": []` line so that the array contains the Client ID of the client application (`ProfileSPA`) as an element of the array.
+
+For instance:
+
+   ```json
+   "knownClientApplications": ["ca8dca8d-f828-4f08-82f5-325e1a1c6428"],
+   ```
+
+1. **Save** the changes to the manifest.
+
+#### Example 1: Specific scopes ####
+
+#####
+
+#### Example 2: .default scope ####
+
+##### Scenario 1: #####
+ 
+ You will observe a same consent prompt, for the below scope values being passed.
+ 
+  1. Pass client id of `Profile API 2` with default scope. 
+      - Scope value in the code `scopes: ["api://app_id_of_Profile_API_2/.default"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_2/.default openid profile offline_access` 
+  1. Pass client id of `Profile SPA` with default scope. 
+      - Scope value in the code `scopes: ["app_id_of_Profile_SPA/.default"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=app_id_of_Profile_SPA/.default openid profile offline_access`
+   1. Pass client id of `Graph API` with default scope. 
+     - Scope value in the code `scopes: ["https://graph.microsoft.com/.default"]`
+     - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `https://graph.microsoft.com/.default openid profile offline_access`
+   1. Pass client id of `Azure Batch Service` with default scope. 
+      - Scope value in the code `scopes: ["https://batch.core.windows.net/.default"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=.default openid profile offline_access`
+   1. Just pass `.default` with default scope. 
+      - Scope value in the code `scopes: [".default"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=.default openid profile offline_access`
+
+##### Explanation for the consents that are shown in the prompt #####
+
+ - The permissions in the black rectangle of the screenshot (`View your list of devices` & `Sign you in and read your profile`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **User.Read** & **Device.Read** from GRAPH resource.  Plus, permission(`Full access to Azure Batch Service API`) is shown since, it also has **Delegated API permissions** added to **user_impersonation** from AzureBatch resource.
+  - The permissions in the red rectangle of the screenshot (`Access Azure Storage As the Signed-in User`, `Maintain access to data you have given it access to` & `Read your calendars`) in the consent prompt are shown since ProfileSPA has **Delegated API permissions** for **access_ProfileAPI_2** for ProfileAPI-1 resource. Then, ProfileAPI-2 ressource and then ProfileAPI-2 inturn has **Delegated API permissions** to **Calendars.Read** & **offline_access** for GRAPH resource and **user_impersonation** scope for Azure storage resource. As a result of a knownclientapplication attribute, instead of showing a consent to `access_ProfileAPI_2`, it combined the API permissions for ProfileAPI-2 and aggregated to 3 permissions in the consent.
+ - The permission in the blue rectangle of the screenshot (`Have full access to Visual Studio Team Services REST APIs` & `Read all files that you have access to`) in the consent prompt, is shown since ProfileAPI-1 has **Delegated API permissions** added to **Calendars.Read** for GRAPH resource and **user_impersonation** scope for Azure devops resource. Please note that, ProfileSPA had an API permission **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient** added for the resource ProfileAPI-1 and also, client id of the ProfileSPA is updated in the KnownclientApplications attribute of the ProfileAPI-1 manifest. As a result of which, consent agregated and combined the permissions which are present in the ProfileAPI-1. 
+
+##### Scenario 2:  #####
+
+1. Pass client id of `Profile API 1` with default scope. 
+      - Scope value in the code `scopes: ["api://app_id_of_Profile_API_1/.default"]`
+      - Final scope to authorize endpoint after appending the default graph scopes by MSAL - `scope=api://app_id_of_Profile_API_1/.default openid profile offline_access`
+
+##### Explanation for no consent prompt #####
+
+Since we added client id of ProfileSPA in the preauthorizedclient attribute against **access_ProfileAPI_1** scope of ProfileAPI-1, there is no consent prompt shown. Additionaly, an accesstoken is granted with the scope `"scp": "access_ProfileAPI_1"` without any user consent. Refer previous example under preauthorizedclient for more details.
 
 ## More information
 
