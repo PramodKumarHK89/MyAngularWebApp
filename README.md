@@ -135,23 +135,24 @@ The first thing that we need to do is to declare the unique [resource](https://d
    - For this sample, accept the proposed Application ID URI (`api://{clientId}`) by selecting **Save**.
 1. All APIs have to publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code) for the client's to obtain an access token successfully. To publish a scope, follow the following steps:
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
-        - For **Scope name**, use `access_ProfileAPI_1`.
-        - Select **Admins and users** options for **Who can consent?**.
-        - For **Admin consent display name** type `Read all files that user can access + Graph_Offlineaccess + Full access to VSTS REST APIs`.
-        - For **Admin consent description** type `Allows the app to access API 1 which internally has 1)Read all files that user can access  2) Full access to VSTS REST APIs 3) offline access to graph.`
-        - For **User consent display name** type `Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs`.
-        - For **User consent description** type `Allows the app to access API 1 which internally has 1)Read all files that you have access  2) Full access to VSTS REST APIs  3) offline access to graph`
-        - Keep **State** as **Enabled**.
-        - Select the **Add scope** button on the bottom to save this scope.
+    - For **Scope name**, use `access_ProfileAPI_1`.
+    - Select **Admins and users** options for **Who can consent?**.
+    - For **Admin consent display name** type `Access for user to call access_ProfileAPI_1 `.
+    - For **Admin consent description** type `Allows the app to invoke access_ProfileAPI_1 which internally needs  1)Read all files that user can access 2) Full access to VSTS REST APIs 3) offline access to graph.`
+    - For **User consent display name** type `Access for you to call access_ProfileAPI_1 permissions `.
+    - For **User consent description** type `Allows the app to invoke access_ProfileAPI_1 which internally needs 1)Read all files that you have access 2) Full access to VSTS REST APIs 3) offline access to graph`
+    - Keep **State** as **Enabled**.
+    - Select the **Add scope** button on the bottom to save this scope.
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
-        - For **Scope name**, use `access_ProfileAPI_1_withoutpreauthclient`.
-        - Select **Admins and users** options for **Who can consent?**.
-        - For **Admin consent display name** type `Read all files that user can access + Graph_Offlineaccess + Full access to VSTS REST APIs`.
-        - For **Admin consent description** type `Allows the app to access API 1 which internally has 1)Read all files that user can access  2) Full access to VSTS REST APIs 3) offline access to graph.`
-        - For **User consent display name** type `Read all files that you have access + Graph_Offlineaccess + Full access to VSTS REST APIs`.
-        - For **User consent description** type `Allows the app to access API 1 which internally has 1)Read all files that you have access  2) Full access to VSTS REST APIs  3) offline access to graph`
-        - Keep **State** as **Enabled**.
-        - Select the **Add scope** button on the bottom to save this scope.
+    - For **Scope name**, use `access_ProfileAPI_1_withoutpreauthclient`.
+    - Select **Admins and users** options for **Who can consent?**.
+    - For **Admin consent display name** type `Access for user to call access_ProfileAPI_1_withoutpreauthclient permissions`.
+    - For **Admin consent description** type `Allows the app to invoke access_ProfileAPI_1_withoutpreauthclient which internally needs  1)Read all files that you have access 2) Full access to VSTS REST APIs 3) offline access to graph`
+    - For **User consent display name** type `Access for you to call access_ProfileAPI_1_withoutpreauthclient permissions `.
+    - For **User consent description** type `Allows the app to invoke access_ProfileAPI_1_withoutpreauthclient which internally needs  1)Read all files that you have access 2) Full access to VSTS REST APIs 3) offline access to graph`
+     - Keep **State** as **Enabled**.
+     - Select the **Add scope** button on the bottom to save this scope.
+
 #### Configure the service app (ProfileAPI-1) to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
@@ -201,14 +202,14 @@ The first thing that we need to do is to declare the unique [resource](https://d
    - For this sample, accept the proposed Application ID URI (`api://{clientId}`) by selecting **Save**.
 1. All APIs have to publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code) for the client's to obtain an access token successfully. To publish a scope, follow the following steps:
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
-        - For **Scope name**, use `access_ProfileAPI_2`.
-        - Select **Admins and users** options for **Who can consent?**.
-        - For **Admin consent display name** type `Read user calendars + Graph_Offlineaccess + Access Azure Storage`.
-        - For **Admin consent description** type `Allows the app to access API 2 which internally has 1)Read user calendars  2) Full access to Azure Storage 3) offline access to graph.`
-        - For **User consent display name** type `Read user calendars + Graph_Offlineaccess + Access Azure Storage`.
-        - For **User consent description** type `Allows the app to access API 2 which internally has 1)Read user calendars  2) Full access to Azure Storage  3) offline access to graph`
-        - Keep **State** as **Enabled**.
-        - Select the **Add scope** button on the bottom to save this scope.
+    - For **Scope name**, use `access_ProfileAPI_2`.
+    - Select **Admins and users** options for **Who can consent?**.
+    - For **Admin consent display name** type `Access for user to call access_ProfileAPI_2 permissions`.
+    - For **Admin consent description** type `Allows the app to invoke access_ProfileAPI_2 which internally needs 1)Read user calendars 2) Full access to Azure Storage 3) offline access to graph`
+    - For **User consent display name** type `Access for you to call access_ProfileAPI_2 permissions `.
+    - For **User consent description** type `Allows the app to invoke access_ProfileAPI_2 which internally needs 1)Read user calendars 2) Full access to Azure Storage 3) offline access to graph`
+     - Keep **State** as **Enabled**.
+     - Select the **Add scope** button on the bottom to save this scope.
         
 #### Configure the service app (ProfileAPI-2) to use your app registration
 
@@ -238,27 +239,26 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Select **Save** to save your changes.
 1. In the app's registration screen, select the **API permissions** blade in the left to open the page where we add access to the APIs that your application needs.
    - Select the **Add a permission** button and then:
-       - Ensure that the **Microsoft APIs** tab is selected.
-       - In the *Commonly used Microsoft APIs* section, select **Microsoft Graph**
-       - In the **Delegated permissions** section, select the **User.Read** & **Device.Read** in the list. Use the search box if necessary.
-       - Select the **Add permissions** button at the bottom.
+    - Ensure that the **Microsoft APIs** tab is selected.
+    - In the *Commonly used Microsoft APIs* section, select **Microsoft Graph**
+    - In the **Delegated permissions** section, select the **User.Read** & **Device.Read** in the list. Use the search box if necessary.
+    - Select the **Add permissions** button at the bottom.
     - Select the **Add a permission** button and then,
-       - Ensure that the **Microsoft APIs** tab is selected.
-       - Select *Azure Batch* section.
-       - In the **Delegated permissions** section, select  **user_impersonation**. Use the search box if necessary.
-       - Select the **Add permissions** button at the bottom.
+     - Ensure that the **Microsoft APIs** tab is selected.
+     - Select *Azure Batch* section.
+     - In the **Delegated permissions** section, select  **user_impersonation**. Use the search box if necessary.
+     - Select the **Add permissions** button at the bottom.
    - Select the **Add a permission** button and then:
-       - Ensure that the **My APIs** tab is selected.
-       - In the list of APIs, select the API `ProfileAPI-1`.
-       - In the **Delegated permissions** section, select the **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient**  in the list. Use the search box if necessary.
-       - Select the **Add permissions** button at the bottom.
+    - Ensure that the **My APIs** tab is selected.
+    - In the list of APIs, select the API `ProfileAPI-1`.
+    - In the **Delegated permissions** section, select the **access_ProfileAPI_1** & **access_ProfileAPI_1_withoutpreauthclient**  in the list. Use the search box if necessary.
+     - Select the **Add permissions** button at the bottom.
    - Select the **Add a permission** button and then:
-       - Ensure that the **My APIs** tab is selected.
-       - In the list of APIs, select the API `ProfileAPI-2`.
-       - In the **Delegated permissions** section, select the **access_ProfileAPI_2** in the list. Use the search box if necessary.
-       - Select the **Add permissions** button at the bottom.
+    - Ensure that the **My APIs** tab is selected.
+    - In the list of APIs, select the API `ProfileAPI-2`.
+    - In the **Delegated permissions** section, select the **access_ProfileAPI_2** in the list. Use the search box if necessary.
+    - Select the **Add permissions** button at the bottom.
      
-
 #### Configure the client app (ProfileSPA) to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
